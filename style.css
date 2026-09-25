@@ -244,6 +244,94 @@ select {
 }
 .side-foot button { font-size: 13px; color: var(--blue); }
 
+.page-foot .pdf-tag { font-size: 12px; padding: 0 6px; }
+
+/* ---------- page organizer ---------- */
+
+#organizer {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+#organizer[hidden] { display: none; }
+
+.org-bar {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  padding: calc(8px + env(safe-area-inset-top)) 12px 8px;
+  background: var(--bar);
+  border-bottom: 1px solid var(--line);
+  touch-action: manipulation;
+}
+.org-bar strong { font-size: 17px; }
+.org-hint { flex: 1 1 200px; color: var(--muted); font-size: 13px; }
+.org-actions button:not(.primary) { font-size: 14px; color: var(--blue); }
+
+#orgGrid {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 22px 18px;
+  align-items: end;
+  align-content: start;
+  padding: 20px 20px calc(40px + env(safe-area-inset-bottom));
+}
+
+.thumb { position: relative; cursor: grab; }
+.thumb .tframe {
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .18);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.thumb canvas { display: block; width: 100%; height: 100%; }
+.thumb .tlabel { text-align: center; font-size: 12px; color: var(--muted); margin-top: 6px; }
+.thumb.selected .tframe { box-shadow: 0 0 0 3px var(--blue); }
+.thumb.selected .tlabel { color: var(--blue); font-weight: 600; }
+.thumb.dragging { opacity: .3; }
+.thumb.drop-before::before, .thumb.drop-after::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 22px;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--blue);
+}
+.thumb.drop-before::before { left: -11px; }
+.thumb.drop-after::after { right: -11px; }
+
+#dragGhost {
+  position: fixed;
+  z-index: 40;
+  pointer-events: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+  transform: translate(-50%, -50%) scale(1.05);
+  background: #fff;
+}
+
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 50;
+  background: rgba(28, 28, 30, .9);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
 /* ---------- dialog ---------- */
 
 dialog {
